@@ -1,0 +1,116 @@
+# ============================================================
+# POO-4TO-CURSO-DJANGO-POSTGRES-REACT — .gitignore
+# Cobertura: Python · Django · Node · Vite · React · TypeScript
+# ============================================================
+
+# --- Entornos virtuales y secretos ----------------------------
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.env
+.env.*
+!.env.example
+.envrc
+
+# --- Python --------------------------------------------------
+__pycache__/
+*.py[codz]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+.installed.cfg
+MANIFEST
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+
+# --- Django --------------------------------------------------
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+backend/db.sqlite3
+
+# --- Pruebas, cobertura, type checkers, linters --------------
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py.cover
+.hypothesis/
+.pytest_cache/
+cover/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+
+# --- Jupyter / IPython ---------------------------------------
+.ipynb_checkpoints
+profile_default/
+ipython_config.py
+
+# --- Node.js / Vite / React / TypeScript ---------------------
+node_modules/
+.vite/
+*.tsbuildinfo
+.eslintcache
+
+# Logs de Node
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# --- IDEs y editores -----------------------------------------
+.idea/
+.vscode/
+.spyderproject
+.spyproject
+.ropeproject
+*.swp
+*.swo
+*~
+.history/
+
+# --- Sistema operativo ---------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# --- Archivos generados por la propia práctica ----------------
+# (NO ignorar; trackeados intencionalmente)
+# - backend/requirements.txt
+# - frontend/package.json
+# - frontend/package-lock.json
+# - backend/.python-version
+# - frontend/.nvmrc
+# - backend/.env.example
+# - frontend/.env.example
+# - docs/uml/*.puml

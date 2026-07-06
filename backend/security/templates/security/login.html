@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Iniciar sesión{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <h2 class="mb-4">Iniciar sesión</h2>
+    <form method="post" id="loginForm">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label>Email</label>
+        <input type="email" name="username" class="form-control" placeholder="correo@ejemplo.com" required>
+      </div>
+      <div class="mb-3">
+        <label>Contraseña</label>
+        <input type="password" name="password" class="form-control" placeholder="********" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Entrar</button>
+      <div id="loginError" class="alert alert-danger mt-3 d-none"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const form = this;
+  const errorDiv = document.getElementById("loginError");
+  fetch(form.action, {
+    method: "POST",
+    headers: {"X-CSRFToken": "{{ csrf_token }}"},
+    body: new FormData(form)
+  })
+  .then(r => r.json())
+  .then(d => {
+    if (d.resp) { window.location.href = "/"; }
+    else {
+      errorDiv.textContent = d.error || "Error al iniciar sesión";
+      errorDiv.classList.remove("d-none");
+    }
+  })
+  .catch(() => {
+    errorDiv.textContent = "Error de conexión";
+    errorDiv.classList.remove("d-none");
+  });
+});
+</script>
+{% endblock %}
