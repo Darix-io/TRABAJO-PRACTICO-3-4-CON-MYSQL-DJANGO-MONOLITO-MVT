@@ -1,0 +1,22 @@
+⚠️Sin servidor de PlantUML, especifica uno con "plantuml.server".
+
+@startuml 03-er-auth
+title Modelo ER — Tabla security_user
+
+entity "security_user" as users {
+  *pkid : BIGINT <>
+  *id : UUID <>
+  *username : VARCHAR(150) <>
+  *email : VARCHAR(254) <>
+  *password : VARCHAR(128)
+  *first_name : VARCHAR(50)
+  *last_name : VARCHAR(50)
+  *is_active : BOOLEAN
+  *is_staff : BOOLEAN
+  *date_joined : DATETIME
+  *created_at : DATETIME
+  *updated_at : DATETIME
+  foto : VARCHAR(1024)
+  last_login : DATETIME
+}
+@enduml

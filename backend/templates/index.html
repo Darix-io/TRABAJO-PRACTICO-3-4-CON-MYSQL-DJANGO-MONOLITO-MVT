@@ -1,9 +1,77 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Inicio{% endblock %}
 {% block content %}
-<div class="text-center mt-5">
-  <h1>Bienvenido, {{ user.get_full_name }}</h1>
-  <p class="lead">Has iniciado sesión correctamente.</p>
-  <p>Email: {{ user.email }}</p>
+<div id="dashboard" class="row">
+  <div class="col-12">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="h3 mb-0"><i class="bi bi-house-door me-2"></i>Panel Principal</h1>
+      <span class="text-muted small"><i class="bi bi-calendar me-1"></i>{% now "d/m/Y" %}</span>
+    </div>
+
+    <div id="skeleton-state" class="row g-4">
+      <div class="col-12 col-lg-6">
+        <div class="card border-0 shadow-sm h-100 skeleton">
+          <div class="card-body text-center p-5">
+            <span class="skeleton-heading"></span>
+            <span class="skeleton-text"></span>
+            <span class="skeleton-text-sm"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <div class="card border-0 shadow-sm h-100 skeleton">
+          <div class="card-body text-center p-5">
+            <span class="skeleton-heading"></span>
+            <span class="skeleton-text"></span>
+            <span class="skeleton-text-sm"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="dashboard-content" class="row g-4 d-none">
+      <div class="col-12 col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body text-center p-5">
+            <div class="display-6 mb-3">
+              <i class="bi bi-person-circle text-primary"></i>
+            </div>
+            <h2 class="h4 fw-bold">Bienvenido, {{ user.first_name|default:user.username }}</h2>
+            <p class="text-muted mb-1">{{ user.email }}</p>
+            <p class="text-muted small mb-0">
+              Último acceso: {{ user.last_login|date:"d/m/Y H:i"|default:"Primer ingreso" }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body text-center p-5">
+            <div class="display-6 mb-3">
+              <i class="bi bi-grid text-success"></i>
+            </div>
+            <h3 class="h5 fw-bold">Módulos Disponibles</h3>
+            <p class="text-muted small mb-0">
+              Los módulos de facturación estarán disponibles próximamente.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
+      document.getElementById('skeleton-state').classList.add('d-none');
+      document.getElementById('dashboard-content').classList.remove('d-none');
+    }, 900);
+  });
+</script>
 {% endblock %}
