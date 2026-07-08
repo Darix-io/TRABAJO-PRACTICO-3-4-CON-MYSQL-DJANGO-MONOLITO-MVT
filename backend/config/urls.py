@@ -10,6 +10,7 @@ urlpatterns = [
     path("login/", LoginPageView.as_view(), name="login"),
     path("security/", include("security.urls")),
     path("catalog/", include("catalog.urls")),
+    path("customers/", include("customers.urls")),
 ]
 
 if settings.DEBUG:
