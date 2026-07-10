@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar QR - UNEMI</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
+        .btn { padding: 10px 20px; background-color: #004b87; color: white; border: none; cursor: pointer; border-radius: 5px; font-size: 16px;}
+        .btn:hover { background-color: #003366; }
+        .alert { padding: 10px; margin-bottom: 15px; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+
+    <h2>Control Vehicular UNEMI</h2>
+    <h3>Generar QR para Vehículo: {{ vehiculo.placa }}</h3>
+    <p>Propietario: {{ vehiculo.id_propietario.nombre }}</p>
+    <p>Estado actual: <strong>{{ vehiculo.estado }}</strong></p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if qr_activo %}
+        <div style="margin: 20px 0; padding: 20px; border: 2px dashed #004b87; display: inline-block;">
+            <h4 style="color: #004b87; margin-top: 0;">Código QR Activo</h4>
+            <img src="/media/qrcodes/{{ nombre_imagen }}" alt="Código QR" width="200">
+            <p style="font-size: 12px; color: gray;">Vence el: {{ qr_activo.fecha_expiracion }}</p>
+        </div>
+    {% else %}
+        <p style="color: #721c24;">Este vehículo no tiene un código QR activo.</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn">Generar Nuevo Código QR</button>
+    </form>
+
+</body>
+</html>
