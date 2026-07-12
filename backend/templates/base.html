@@ -29,14 +29,20 @@
         <div class="d-flex align-items-center">
           <span class="text-light me-3 small">
             <i class="bi bi-person-circle me-1"></i>
-            {{ user.get_full_name|default:user.email }}
+            {% if user.is_authenticated %}
+              {{ user.get_full_name|default:user.email }}
+            {% else %}
+              Invitado
+            {% endif %}
           </span>
+          {% if user.is_authenticated %}
           <form method="post" action="{% url 'security:logout' %}" class="d-inline">
             {% csrf_token %}
             <button type="submit" class="btn btn-outline-light btn-sm">
               <i class="bi bi-box-arrow-right me-1"></i>Salir
             </button>
           </form>
+          {% endif %}
         </div>
       </div>
     </div>
